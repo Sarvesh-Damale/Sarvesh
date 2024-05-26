@@ -1,0 +1,54 @@
+<% if(locals.name) {%>
+  <div class="alert alert-info" role="alert">
+    Logged in as <%= locals.name %>
+  </div>
+  <% } %> 
+<h1 class="text-center my-3">Update Job</h1>
+<form action="/jobs/<%= job.id %>" method="post">
+    <div class="form-group col-md-4 mx-auto my-2">
+      <label for="category">Job Category</label>
+      <select name="category" id="category">
+        <option value="TECH">TECH</option>
+        <option value="Non TECH">Non TECH</option>
+      </select>
+      <label for="designation col-md-4 mx-auto my-2">Designation</label>
+      <select name="designation" id="designation">
+        <option value="Full Stack Developer">Full Stack Developer</option>
+        <option value="Frontend Developer">Frontend Developer</option>
+        <option value="Operations">Operations</option>
+      </select>     
+    </div>
+    <div class="form-group col-md-4 mx-auto my-2">
+      <label for="companyname">Company Name</label>
+      <input type="text" class="form-control" id="companyname" name="companyname" value="<%= job.companyName %>" required>
+    </div>
+    <div class="form-group col-md-4 mx-auto my-2">
+        <label for="joblocation">Job Location</label>
+        <input type="text" class="form-control" id="joblocation" name="joblocation" value="<%= job.jobLocation %>" required>
+      </div>
+      <div class="form-group col-md-4 mx-auto my-2">
+        <label for="salary">Salary</label>
+        <input type="text" class="form-control" id="salary" name="salary" value="<%= job.salary %>" required>
+      </div>
+      <div class="form-group col-md-4 mx-auto my-2">
+        <label for="positions">No of Positions</label>
+        <input type="text" class="form-control" id="positions" name="positions" value="<%= job.numberOfOpenings %>" required>
+      </div>
+      <div class="form-group col-md-4 mx-auto my-2">
+      <label for="skills">Skills</label>
+      <select name="skills" multiple required>
+        <option value="Java">Java</option>
+        <option value="Pyhton">Pyhton</option>
+        <option value="SQL">SQL</option>
+        <option value="REACT">REACT</option>
+        <option value="NODE.js">NODE.js</option>
+      </select>
+    </div>
+      <div class="form-group col-md-4 mx-auto my-2">
+        <label for="applyby">Apply By</label>
+        <input type="date" class="form-control" id="applyby" name="applyby" value="<%= job.applyby %>" required>
+      </div>
+      <div class="form-group col-md-4 mx-auto my-2">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+  </form>

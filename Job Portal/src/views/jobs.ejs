@@ -1,0 +1,26 @@
+<% if(locals.name) {%>
+<div class="alert alert-info" role="alert">
+  Logged in as <%= locals.name %>&nbsp;&nbsp;<% if (locals.lastVisit) {%>Last login:<%=locals.lastVisit%>  <%}%>
+</div>
+<% } %>
+<div class="main">
+  <% if(jobs){ jobs.forEach((job) =>{ %>
+  <div class="flex-box bg-dark">
+    <h3 class="text-center mt-2 text-warning"><%= job.companyName %></h3>
+    <h5 class="text-center text-primary"><%= job.jobCategory %>&nbsp;<%= job.jobDesignation %></h5>
+    <h5 class="ml-2">&#128205;<%= job.jobLocation %></h5>
+    <h5 class="ml-3"><%= job.salary %></h5>
+    <div class="skills p-1 mt-3 ml-2">
+      <% job.skillsRequired.forEach((skill) =>{ %>
+      <button class="btn btn-sm btn-outline-info mt-1"><%= skill %></button>
+      <% }) %>
+    </div>
+    <a href="/jobs/<%= job.id%>" class="btn btn-success my-3 ml-5 ">
+          View details
+        </a>
+  </div>
+  <% })} else { %>
+    <h2>Sorry !!! No jobs available</h2>
+    <% } %>
+</div>
+  

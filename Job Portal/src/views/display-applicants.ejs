@@ -1,0 +1,27 @@
+<% if(locals.name) {%>
+  <div class="alert alert-info" role="alert">
+    Logged in as <%= locals.name %>
+  </div>
+  <% } %> 
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Resume</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% applicants.forEach((applicant,index)=>{ %>
+      <tr class="text-white">
+        <th scope="row"><%= index+1 %></th>
+        <td><%= applicant.name %></td>
+        <td><%= applicant.email %></td>
+        <td><%= applicant.contact %></td>
+        <td><a class="btn btn-primary" role="button" href="<%= applicant.resumePath %>">Resume</a></td>
+      </tr>
+      <% }) %>
+      </tbody>
+    </table>

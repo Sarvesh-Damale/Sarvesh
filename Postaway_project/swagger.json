@@ -1,0 +1,463 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Postaway API",
+        "description": "API for Postaway Application",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+
+    "components": 
+    {
+        "securitySchemes": 
+        {
+            "JWT": 
+            {
+                "in":"header",
+                "name":"Authorization",
+                "type":"apiKey"
+            }
+        }
+    },
+
+    "paths": {
+        "/api/signup": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/api/signin": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Sign in ",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User signed in"
+                    },
+                    "400": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/api/posts": {
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Create a post",
+                "description":"User will be able to add post",
+                "security":[{"JWT": {} }],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "caption": {
+                                        "type": "string"
+                                    },
+                                    "imageUrl": {
+                                        "type": "string",
+                                        "format":"binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Post created"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get all posts created by user",
+                "description":"User will be able to see his/her posts",
+                "security":[{"JWT": {} }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/posts/all": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get all posts created by all user",
+                "description":"User will be able to see all posts created by other users also",
+                "security":[{"JWT": {} }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/posts/{id}": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get post by Id",
+                "description":"User will be able to see his/her posts by post id",
+                "security":[{"JWT": {} }],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Update post by Id",
+                "description":"User will be able to update his/her posts by post id",
+                "security":[{"JWT": {} }],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "caption": {
+                                        "type": "string"
+                                    },
+                                    "imageUrl": {
+                                        "type": "string",
+                                        "format":"binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Delete post by post Id",
+                "description":"User will be able to delete his/her posts by post id",
+                "security":[{"JWT": {} }],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "Post deleted"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/comments/{id}": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Add comment to post",
+                "description": "User will be able to add comment to post by post id",
+                "security":[{"JWT": {} }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "content": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "Comment added"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {"description": "Post not found"}
+                }
+            },
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get comments by post id",
+                "description": "User will be able to see comments for post by post id",
+                "security":[{"JWT": {} }],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {"description": "Post not found"}
+                }
+            },
+            "put": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Update comment to post",
+                "description": "User will be able to update comment to post by post id",
+                "security":[{"JWT": {} }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "content": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "Comment updated"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {"description": "Post not found"}
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Delete comment on post",
+                "description": "User will be able to delete comment to post by comment id",
+                "security":[{"JWT": {} }],
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "Comment deleted"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {"description": "Post not found"}
+                }
+            }
+        },
+        "/api/likes/toggle/{postId}": {
+            "post": {
+                "tags": [
+                    "Likes"
+                ],
+                "summary": "Toggle like for a post",
+                "description": "User will be able to toggle the like on post",
+                "security":[{"JWT": {} }],
+                "parameters": [
+                    {
+                      "name": "postId",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "Like toggled"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {"description": "Post not found"}
+                }
+            }
+        },
+        "/api/likes/{postId}":{
+            "get": {
+                "tags": [
+                    "Likes"
+                ],
+                "summary": "Get all likes for a post",
+                "description": "User will be able to see likes on post",
+                "security":[{"JWT": {} }],
+                "parameters": [
+                    {
+                      "name": "postId",
+                      "in": "path",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                    ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {"description": "Post not found"}
+                }
+            }
+        }
+
+    }
+}

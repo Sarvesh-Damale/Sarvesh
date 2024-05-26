@@ -1,0 +1,28 @@
+<% if(locals.name) {%>
+  <div class="alert alert-info" role="alert">
+    Logged in as <%= locals.name %>
+  </div>
+ <% } %> 
+<div class="job-detail mx-5">
+ <h1 class="mt-3"><%= job.jobDesignation%>&nbsp;opportunity in <%=job.jobLocation %> at <%= job.companyName %></h1>
+ <br>
+ <br>
+ <h3><%=job.companyName %></h3>
+ <h5><%=job.jobCategory %>&nbsp;<%=job.jobDesignation%></h5>
+ <h5><%=job.salary %></h5>
+ <h5>Apply By: <%=job.applyby %></h5>
+ <h5>Number of openings: <%= job.numberOfOpenings %></h5>
+ <h5><a href="/applicants/<%=job.id %>">Applicants</a>: <%=job.applicants.length%></h5>
+ <div class="skills p-1 ">
+    <% job.skillsRequired.forEach((skill) =>{ %>
+    <button class="btn btn-sm btn-outline-dark text-white"><%= skill %></button>
+    <% }) %>
+  </div>
+ <a class="btn btn-success mt-3" href="/apply/<%=job.id %>">Apply Now</a><br><br>
+ <button type="button" class="btn btn-success">Posted on: <%=job.jobPosted%></button>
+ <% if(locals.email) {%>
+ <a href="/updatejob/<%=job.id %>" class="btn btn-primary">Update</a>
+ <!-- <a href="/delete/<%=job.id %>" class="btn btn-warning">Delete</a> -->
+ <button class="btn btn-danger" onclick="deleteProduct('<%=job.id %>')">Delete</button>
+ <% } %>
+  </div>
