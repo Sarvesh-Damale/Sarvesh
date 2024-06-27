@@ -1,0 +1,24 @@
+
+<% if(habits.length==0) {%>
+<h1>No habits to display</h1>
+<% } else {%>
+    <table class="table" style="width: 60%; margin-left:20%; margin-top:3%">
+        <thead>
+          <tr>
+            <th style="border: 2px solid black" class="col-2" >#</th>
+            <th style="border: 2px solid black" class="col-5" >Habit</th>
+            <th style="border: 2px solid black" class="col-5" >Week view</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% habits.forEach((habit,index)=>{ %>
+          <tr class="text-white">
+            <th class="col-2" style="border: 2px solid black" scope="row"><%= index+1 %></th>
+            <td class="col-5" style="border: 2px solid black"><%= habit.habit %></td>
+            <td class="col-5" style="border: 2px solid black"><a class="btn btn-primary" role="button" href="/weekView/<%= habit.habit %>">Mark Progress</a></td>
+          </tr>
+          <% }) %>
+          </tbody>
+        </table>
+<% } %>
+  
