@@ -1,0 +1,31 @@
+
+<% if(employees.length==0) {%>
+    <h1>No employees added as of now</h1>
+    <% } else {%>
+        <table class="table" style="width: 60%; margin-left:20%; margin-top:3%">
+            <thead>
+              <tr>
+                <th style="border: 2px solid black" class="col-2" >#</th>
+                <th style="border: 2px solid black" class="col-5" >Name</th>
+                <th style="border: 2px solid black" class="col-5" >Email</th>
+                <th style="border: 2px solid black" class="col-5" >Feedback</th>
+                <th style="border: 2px solid black" class="col-5" >Make Admin</th>
+                <th style="border: 2px solid black" class="col-5" >Feedback Assignee</th>
+                <th style="border: 2px solid black" class="col-5" >Delete Employee</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% employees.forEach((employee,index)=>{ %>
+              <tr class="text-white">
+                <th class="col-2" style="border: 2px solid black" scope="row"><%= index+1 %></th>
+                <td class="col-5" style="border: 2px solid black"><%= employee.name %></td>
+                <td class="col-5" style="border: 2px solid black"><%= employee.email %></td>
+                <td class="col-5" style="border: 2px solid black"><a class="btn btn-primary" role="button" href="/viewFeedback/<%= employee.email %>">View Feedback</a></td>
+                <td class="col-5" style="border: 2px solid black"><a class="btn btn-primary" role="button" href="/addAdmin/<%= employee.email %>">Add Admin</a></td>
+                <td class="col-5" style="border: 2px solid black"><a class="btn btn-primary" role="button" href="/assignReviewer/<%= employee.email %>">Assign</a></td>
+                <td class="col-5" style="border: 2px solid black"><a class="btn btn-primary" role="button" href="/deleteEmployee/<%= employee._id %>">Delete</a></td>
+              </tr>
+              <% }) %>
+              </tbody>
+            </table>
+    <% } %>

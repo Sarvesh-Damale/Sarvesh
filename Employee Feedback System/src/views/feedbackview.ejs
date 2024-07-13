@@ -1,0 +1,11 @@
+
+<% feedback.forEach(fb => { %>
+<div class="card" style="width: 40rem; margin:3% 0% 3% 30%">
+    <div class="card-body">
+      <h5 class="card-title" style="color:black"><%= fb.parameter %></h5>
+      <h6 class="card-subtitle mb-2 text-muted" style="color:blue">Rating: <%= fb.rating%></h6>
+      <p class="card-text" style="color:grey">Comments:<%= fb.comment%></p>
+    </div>
+  </div>
+<% }) %>
+<a class="btn btn-primary" style="margin-left:45%"role="button" href="/updateFeedBack/<%= email %>">Update Feedback</a>

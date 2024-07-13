@@ -1,0 +1,15 @@
+<h1 class="text-center my-3">Feedback</h1>
+<form action="/postFeedback/<%= email %>" method="post">
+  <% feedback.forEach((fb,index) => { %>
+    <div class="form-group col-md-4 mx-auto my-2">
+      <h2><%= fb.parameter %></h2>
+      <label for="evaluationParameter<%= index+1 %>-rating">Rating</label>
+      <input type="text" class="form-control"  name="evaluationParameter<%= index+1 %>-rating" placeholder="Enter value from 1 - 5. 1 being higest rating " value="<%= fb.rating%>"required>
+      <label for="evaluationParameter<%= index+1 %>-comment">Comment</label>
+      <input type="text" class="form-control"  name="evaluationParameter<%= index+1 %>-comment" placeholder="Add your comments" value="<%= fb.comment%>" required>
+    </div>
+    <% }) %>
+    <div class="form-group col-md-4 mx-auto my-4">
+    <button type="submit" class="btn btn-success  mx-auto">Submit</button>
+  </div>
+  </form>
