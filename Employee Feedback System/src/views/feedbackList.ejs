@@ -1,0 +1,26 @@
+
+<% if(employees.length==0) {%>
+    <h1>No pending feedback as of now</h1>
+    <% } else {%>
+        <h1 style="margin-left:33%">Add/Update Feedback </h1>
+        <table class="table" style="width: 60%; margin-left:20%; margin-top:3%">
+            <thead>
+              <tr>
+                <th style="border: 2px solid black" class="col-2" >#</th>
+                <th style="border: 2px solid black" class="col-5" >Name</th>
+                <th style="border: 2px solid black" class="col-5" >Email</th>
+                <th style="border: 2px solid black" class="col-5" >Feedback</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% employees.forEach((employee,index)=>{ %>
+              <tr class="text-white">
+                <th class="col-2" style="border: 2px solid black" scope="row"><%= index+1 %></th>
+                <td class="col-5" style="border: 2px solid black"><%= employee %></td>
+                <td class="col-5" style="border: 2px solid black"><%= employee %></td>
+                <td class="col-5" style="border: 2px solid black"><a class="btn btn-primary" role="button" href="/viewFeedback/<%= employee %>">Add Feedback</a></td>
+              </tr>
+              <% }) %>
+              </tbody>
+            </table>
+    <% } %>
